@@ -1,0 +1,96 @@
+#leftDiv {
+    float: left;
+    margin-left: 15px;
+}
+
+#rightDiv {
+    float: right;
+    margin-right: 15px;
+}
+
+#editor {}
+
+.CodeMirror {
+    font-family: Monaco, monospace !important;
+    font-size: 14px;
+}
+
+.sidebar {
+    background-color: #24272e;
+}
+
+.pane-sm {
+    width: 20%;
+    max-width: 20%;
+    overflow: auto;
+}
+
+.pane {
+    width: 80%;
+    max-width: 80%;
+}
+
+.nav-group {
+    /* border: 1px solid red; */
+}
+
+.pane {
+    border-left: 1px solid #666;
+}
+
+.nav-group-item {
+    color: #929bab;
+    font-family: Helvetica, Arial, sans-serif
+}
+
+.nav-group-item .icon {
+    color: #929bab;
+    margin-right: 2px;
+}
+
+.nav-group-item #text {
+    color: red;
+    margin-left: 5px;
+}
+
+.nav-group-title {
+    color: #929bab;
+}
+
+span.nav-group-item {
+    padding-left: 15px;
+    /* border: 1px solid red; */
+}
+
+.nav-item-text {
+    margin-left: 5px;
+}
+
+.one-space {
+    width: 22px;
+    height: 18px;
+    float: left;
+    /* border: 1px solid red; */
+}
+
+.one-deep {
+    margin-left: 22px;
+}
+
+.icon {
+    /* border: 1px solid red; */
+}
+
+.content-area {
+    /* height: 30px; */
+    margin-left: 6px;
+    /* border: 1px solid red; */
+}
+
+.nav-group-item:active, .nav-group-item.active {
+    background-color: transparent;
+}
+
+.nav-item-text {
+    /* border: 1px solid red; */
+}

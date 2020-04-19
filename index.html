@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Atom Hero</title>
+    <link rel="stylesheet" href="../../css/photon.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="theme/abcdef.css">
+    <link rel="stylesheet" href="addon/lint/lint.css">
+    <link rel="stylesheet" href="addon/fold/foldgutter.css" />
+
+    <script src="lib/codemirror.js"></script>
+
+    <script src="tree-view.js"></script>
+
+
+    <script src="addon/fold/foldcode.js"></script>
+    <script src="addon/fold/foldgutter.js"></script>
+    <script src="addon/fold/brace-fold.js"></script>
+    <script src="addon/fold/xml-fold.js"></script>
+    <script src="addon/fold/markdown-fold.js"></script>
+    <script src="addon/fold/comment-fold.js"></script>
+
+    <script src="addon/comment/comment.js"></script>
+
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="mode/javascript/javascript.js"></script>
+
+    <script src="https://unpkg.com/jshint@2.9.6/dist/jshint.js"></script>
+    <script src="https://unpkg.com/jsonlint@1.6.3/web/jsonlint.js"></script>
+
+    <script src="addon/lint/lint.js"></script>
+    <script src="addon/lint/javascript-lint.js"></script>
+    <script src="addon/lint/json-lint.js"></script>
+    <script>
+        window.$ = window.jQuery = require('jquery');
+        var beautify = require('js-beautify').js;
+        var fs = require('fs');
+        var _ = require('lodash');
+    </script>
+</head>
+
+<body>
+    <div class="window">
+        <div class="window-content">
+            <div class="pane-group">
+                <div class="pane-sm sidebar">
+
+                    <nav class="nav-group">
+                        <h5 class="nav-group-title">Files</h5>
+                    </nav>
+                </div>
+                <div class="pane">
+
+                    <div class="tab-group">
+                        <div class="tab-item">
+                            <span class="icon icon-cancel icon-close-tab"></span>
+                            index.js
+                        </div>
+                        <div class="tab-item tab-item-fixed">
+                            <span class="icon icon-plus"></span>
+                        </div>
+                    </div>
+                    <textarea id="editor"></textarea>
+                </div>
+            </div>
+        </div>
+        <footer class="toolbar toolbar-footer">
+            <div class="toolbar-actions">
+                <button class="btn btn-default">
+                    Cancel
+                </button>
+                <button onclick="formatJS()" class="btn btn-primary pull-right">
+                    Format JS
+                </button>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function() {
+        buildTreeView($('.nav-group'));
+        $(document).on('click', '.icon.opener', handleOpenerClick);
+        $(document).on('click', '.nav-item-text', handleItemClick);
+    });
+</script>
+<script src="index.js"></script>
+
+
+</html>
