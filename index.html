@@ -44,11 +44,13 @@
     <div class="window">
         <div class="window-content">
             <div class="pane-group">
-                <div class="pane-sm sidebar">
+                <div id="navPane" class="pane-sm sidebar">
 
                     <nav class="nav-group">
                         <h5 class="nav-group-title">Files</h5>
                     </nav>
+                    <div id="files">
+                    </div>
                 </div>
                 <div class="pane">
 
@@ -80,7 +82,6 @@
 
 <script>
     $(document).ready(function() {
-        buildTreeView($('.nav-group'));
         $(document).on('click', '.icon.opener', handleOpenerClick);
         $(document).on('click', '.nav-item-text', handleItemClick);
     });

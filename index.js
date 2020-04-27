@@ -9,7 +9,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 		'Cmd-Up': increaseFontSize,
 		'Cmd-Down': decreaseFontSize,
 		'Cmd-S': saveFile
-		
+
 	},
 	lint: true
 });
@@ -18,7 +18,7 @@ editor.setSize('100%', '100%');
 
 var fontSize = 14;
 
-editor.getWrapperElement().style["font-size"] = fontSize+"px";
+editor.getWrapperElement().style["font-size"] = fontSize + "px";
 
 
 function formatJS() {
@@ -36,10 +36,40 @@ function saveFile() {
 
 function increaseFontSize() {
 	fontSize += 2;
-	editor.getWrapperElement().style["font-size"] = fontSize+"px";
+	editor.getWrapperElement().style["font-size"] = fontSize + "px";
 }
 
 function decreaseFontSize() {
 	fontSize -= 2;
-	editor.getWrapperElement().style["font-size"] = fontSize+"px";
+	editor.getWrapperElement().style["font-size"] = fontSize + "px";
 }
+
+document.getElementById('navPane').ondragstart = (event) => {
+	event.preventDefault()
+}
+
+(function() {
+	var holder = document.getElementById('navPane');
+
+	holder.ondragover = () => {
+		return false;
+	};
+
+	holder.ondragleave = () => {
+		return false;
+	};
+
+	holder.ondragend = () => {
+		return false;
+	};
+
+	holder.ondrop = (e) => {
+		e.preventDefault();
+
+		for (let f of e.dataTransfer.files) {
+			buildTreeView('#files', f.path);
+		}
+
+		return false;
+	};
+})();

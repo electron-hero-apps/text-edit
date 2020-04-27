@@ -15,6 +15,13 @@ function addFile(fileName, elementToAppendTo, path) {
 	elementToAppendTo.append(newRow);
 }
 
+function addTopLevelFolder(folderName, elementToAppendTo) {
+	var newRow = $.parseHTML(topLevelFolder);
+	$(newRow).find('.nav-item-text').html(folderName);
+	$(newRow).find('.nav-item-text').data('entryType', 'top-folder');
+	elementToAppendTo.append(newRow);
+}
+
 var newFolderHTML = '<span class="nav-group-item">' +
 	'<span class="icon opener icon-right-open">' +
 	'</span><span class="icon icon-folder"></span>' +
@@ -26,6 +33,12 @@ var newFileHTML = '<span class="nav-group-item">' +
 	'<span class="icon icon-doc-text one-deep"></span>' +
 	'<span class="nav-item-text">libs</span>' +
 	'</span>';
+
+var topLevelFolder = '<span class="nav-group-item">' +
+	'<span class="icon icon-folder"></span>' +
+	'<span class="nav-item-text">libs</span>' +
+	'</span>';
+
 
 function handleItemClick() {
 	var fileType = $(this).data('entryType');
@@ -87,10 +100,14 @@ function handleOpenerClick() {
 	}
 }
 
-function buildTreeView(elementToAppendTo) {
+function buildTreeView(elementToAppendTo, pathToStart) {
+	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];
-	fs.readdir(__dirname, function(err, files) {
+	var topFolderName = pathToStart.split('/').slice(-1)[0];
+	addTopLevelFolder(topFolderName, $(elementToAppendTo))
+
+	fs.readdir(pathToStart, function(err, files) {
 		//handling error
 		if (err) {
 			return console.log('Unable to scan directory: ' + err);
@@ -98,7 +115,7 @@ function buildTreeView(elementToAppendTo) {
 		//listing all files using forEach
 		files.forEach(function(file) {
 			if (file.substr(0, 1) != '.') {
-				if (fs.lstatSync(__dirname + '/' + file).isDirectory()) {
+				if (fs.lstatSync(pathToStart + '/' + file).isDirectory()) {
 					foldersToAdd.push(file);
 				} else {
 					filesToAdd.push(file);
@@ -106,10 +123,10 @@ function buildTreeView(elementToAppendTo) {
 			}
 		});
 		_.each(foldersToAdd, function(item) {
-			addFolder(item, elementToAppendTo,  __dirname);
+			addFolder(item, $(elementToAppendTo),  pathToStart);
 		})
 		_.each(filesToAdd, function(item) {
-			addFile(item, elementToAppendTo, __dirname);
+			addFile(item, $(elementToAppendTo), pathToStart);
 		})
 	});
 }
