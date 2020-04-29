@@ -54,7 +54,8 @@ function handleItemClick() {
 		
 		console.log(filename);
 		console.log(ext);
-		
+		$('#appTitle').html(filePath);
+		$('#filename').html(filename);
 		editor.setValue(data);
 	}
 }
