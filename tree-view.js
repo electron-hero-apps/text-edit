@@ -1,16 +1,16 @@
-function addFolder(folderName, elementToAppendTo, path) {
+function addFolder(folderName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFolderHTML);
 	$(newRow).find('.nav-item-text').html(folderName);
-	$(newRow).find('.nav-item-text').data('path', path + '/' + folderName + '/');
+	$(newRow).find('.nav-item-text').data('path', path.join(_path , folderName ));
 	$(newRow).find('.nav-item-text').data('entryType', 'folder');
 	$(newRow).find('.content-area').toggle(false);
 	elementToAppendTo.append(newRow);
 }
 
-function addFile(fileName, elementToAppendTo, path) {
+function addFile(fileName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFileHTML);
 	$(newRow).find('.nav-item-text').html(fileName);
-	$(newRow).find('.nav-item-text').data('path', path + '/' + fileName);
+	$(newRow).find('.nav-item-text').data('path', path.join(_path,fileName));
 	$(newRow).find('.nav-item-text').data('entryType', 'file');
 	elementToAppendTo.append(newRow);
 }
@@ -48,7 +48,7 @@ function handleItemClick() {
 		const data = fs.readFileSync(filePath, {
 			encoding: 'utf8'
 		});
-		var filename = filePath.split('/').pop();
+		var filename = filePath.split(path.sep).pop();
 		var ext = filename.split('.').pop();
 		setMode(filename);
 		
@@ -84,7 +84,7 @@ function handleOpenerClick() {
 				//listing all files using forEach
 				files.forEach(function(file) {
 					if (file.substr(0, 1) != '.') {
-						if (fs.lstatSync(filePath + '/' + file).isDirectory()) {
+						if (fs.lstatSync(path.join(filePath, file)).isDirectory()) {
 							foldersToAdd.push(file);
 						} else {
 							filesToAdd.push(file);
@@ -112,7 +112,7 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];
-	var topFolderName = pathToStart.split('/').slice(-1)[0];
+	var topFolderName = pathToStart.split(path.sep).slice(-1)[0];
 	addTopLevelFolder(topFolderName, $(elementToAppendTo))
 
 	fs.readdir(pathToStart, function(err, files) {
@@ -123,7 +123,7 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 		//listing all files using forEach
 		files.forEach(function(file) {
 			if (file.substr(0, 1) != '.') {
-				if (fs.lstatSync(pathToStart + '/' + file).isDirectory()) {
+				if (fs.lstatSync(path.join(pathToStart,file)).isDirectory()) {
 					foldersToAdd.push(file);
 				} else {
 					filesToAdd.push(file);
