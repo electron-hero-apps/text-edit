@@ -94,3 +94,15 @@ span.nav-group-item {
 .nav-item-text {
     /* border: 1px solid red; */
 }
+
+.mode-input {
+    width: 150px;
+}
+
+.bold {
+    font-weight: bold
+}
+
+#modeValue {
+    padding-left: 10px;
+}

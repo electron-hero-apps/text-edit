@@ -32,6 +32,10 @@
     <script src="addon/lint/lint.js"></script>
     <script src="addon/lint/javascript-lint.js"></script>
     <script src="addon/lint/json-lint.js"></script>
+
+    <script src="addon/mode/loadmode.js"></script>
+    <script src="mode/meta.js"></script>
+
     <script>
         window.$ = window.jQuery = require('jquery');
         var beautify = require('js-beautify').js;
@@ -72,6 +76,15 @@
                 <button class="btn btn-default">
                     Cancel
                 </button>
+
+                <!-- <input type="text" id="editorMode" class="form-control mode-input" placeholder="Enter mode"> -->
+                <!-- <button onclick="setMode()" class="btn btn-primary">
+                    Set Mode
+                </button> -->
+                <span class="bold">Mode:</span>
+                <span id="modeValue"></span>
+
+
                 <button onclick="formatJS()" class="btn btn-primary pull-right">
                     Format JS
                 </button>

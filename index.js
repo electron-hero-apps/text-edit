@@ -1,6 +1,9 @@
+CodeMirror.modeURL = "../text-edit/mode/%N/%N.js";
+
+
 var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 	lineNumbers: true,
-	mode: "javascript",
+	//mode: "html",
 	foldGutter: true,
 	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
 	extraKeys: {
@@ -46,6 +49,65 @@ function decreaseFontSize() {
 
 document.getElementById('navPane').ondragstart = (event) => {
 	event.preventDefault()
+}
+
+function setMode(_val) {
+	var val = $('#editorMode').val()
+	if (_val) {
+		val = _val;
+	}
+	var m, mode, spec;
+	if (m = /.+\.([^.]+)$/.exec(val)) {
+		var info = CodeMirror.findModeByExtension(m[1]);
+		if (info) {
+			mode = info.mode;
+			spec = info.mime;
+		}
+	} else if (/\//.test(val)) {
+		var info = CodeMirror.findModeByMIME(val);
+		if (info) {
+			mode = info.mode;
+			spec = val;
+		}
+	} else {
+		mode = spec = val;
+	}
+
+	// need to do something with linter settings, like
+	// editor.setOption("lint", CodeMirror.lint.css)
+
+	if (mode) {
+		editor.setOption("mode", spec);
+		CodeMirror.autoLoadMode(editor, mode);
+		//document.getElementById("modeinfo").textContent = spec;
+		console.log('set mode to ' + spec);
+		$('#modeValue').html(spec);
+
+	} else {
+		alert("Could not find a mode corresponding to " + val);
+		$('#modeValue').html('???');
+
+	}
+
+	switch (spec) {
+		case "application/json":
+			editor.setOption("lint", CodeMirror.lint.json)
+			break;
+		case "text/javascript":
+			editor.setOption("lint", CodeMirror.lint.js)
+			break;
+		case "text/html":
+			editor.setOption("lint", CodeMirror.lint.html)
+			break;
+		case "text/css":
+			editor.setOption("lint", CodeMirror.lint.css)
+			break;
+	}
+
+
+
+
+
 }
 
 (function() {

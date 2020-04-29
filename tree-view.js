@@ -48,6 +48,13 @@ function handleItemClick() {
 		const data = fs.readFileSync(filePath, {
 			encoding: 'utf8'
 		});
+		var filename = filePath.split('/').pop();
+		var ext = filename.split('.').pop();
+		setMode(filename);
+		
+		console.log(filename);
+		console.log(ext);
+		
 		editor.setValue(data);
 	}
 }
