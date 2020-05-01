@@ -1,7 +1,7 @@
 function addFolder(folderName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFolderHTML);
 	$(newRow).find('.nav-item-text').html(folderName);
-	$(newRow).find('.nav-item-text').data('path', path.join(_path , folderName ));
+	$(newRow).find('.nav-item-text').data('path', path.join(_path, folderName));
 	$(newRow).find('.nav-item-text').data('entryType', 'folder');
 	$(newRow).find('.content-area').toggle(false);
 	elementToAppendTo.append(newRow);
@@ -10,7 +10,7 @@ function addFolder(folderName, elementToAppendTo, _path) {
 function addFile(fileName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFileHTML);
 	$(newRow).find('.nav-item-text').html(fileName);
-	$(newRow).find('.nav-item-text').data('path', path.join(_path,fileName));
+	$(newRow).find('.nav-item-text').data('path', path.join(_path, fileName));
 	$(newRow).find('.nav-item-text').data('entryType', 'file');
 	elementToAppendTo.append(newRow);
 }
@@ -51,7 +51,7 @@ function handleItemClick() {
 		var filename = filePath.split(path.sep).pop();
 		var ext = filename.split('.').pop();
 		setMode(filename);
-		
+
 		console.log(filename);
 		console.log(ext);
 		$('#appTitle').html(filePath);
@@ -73,9 +73,9 @@ function handleOpenerClick() {
 			var itemText = $(this).closest('.nav-group-item').find('.nav-item-text');
 			var fileType = $(itemText).data('entryType');
 			var filePath = $(itemText).data('path');
-            var filesToAdd = [];
-        	var foldersToAdd = [];
-            
+			var filesToAdd = [];
+			var foldersToAdd = [];
+
 			fs.readdir(filePath, function(err, files) {
 				//handling error
 				if (err) {
@@ -108,33 +108,65 @@ function handleOpenerClick() {
 	}
 }
 
+function caseInesensitiveSort(a, b) {
+	if (a.toLowerCase() < b.toLowerCase()) return -1;
+	if (a.toLowerCase() > b.toLowerCase()) return 1;
+	return 0;
+}
+
 function buildTreeView(elementToAppendTo, pathToStart) {
 	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];
 	var topFolderName = pathToStart.split(path.sep).slice(-1)[0];
-	addTopLevelFolder(topFolderName, $(elementToAppendTo))
 
-	fs.readdir(pathToStart, function(err, files) {
-		//handling error
-		if (err) {
-			return console.log('Unable to scan directory: ' + err);
-		}
-		//listing all files using forEach
-		files.forEach(function(file) {
-			if (file.substr(0, 1) != '.') {
-				if (fs.lstatSync(path.join(pathToStart,file)).isDirectory()) {
-					foldersToAdd.push(file);
-				} else {
-					filesToAdd.push(file);
-				}
+	console.log(pathToStart);
+	if ((fs.lstatSync(pathToStart).isDirectory())) {
+
+		addTopLevelFolder(topFolderName, $(elementToAppendTo))
+		fs.readdir(pathToStart, function(err, files) {
+			//handling error
+			if (err) {
+				return console.log('Unable to scan directory: ' + err);
 			}
+			//listing all files using forEach
+			files.forEach(function(file) {
+				if (file.substr(0, 1) != '.') {
+					if (fs.lstatSync(path.join(pathToStart, file)).isDirectory()) {
+						foldersToAdd.push(file);
+					} else {
+						filesToAdd.push(file);
+					}
+				}
+			});
+			_.each(foldersToAdd, function(item) {
+				addFolder(item, $(elementToAppendTo), pathToStart);
+			})
+
+			filesToAdd = filesToAdd.sort(caseInesensitiveSort);
+
+			_.each(filesToAdd, function(item) {
+				addFile(item, $(elementToAppendTo), pathToStart);
+			})
 		});
-		_.each(foldersToAdd, function(item) {
-			addFolder(item, $(elementToAppendTo),  pathToStart);
-		})
-		_.each(filesToAdd, function(item) {
-			addFile(item, $(elementToAppendTo), pathToStart);
-		})
-	});
+
+	} else {
+
+		var folderPathForFile = pathToStart.split(path.sep);
+		var fileName = pathToStart.split(path.sep).slice(-1)[0];
+		folderPathForFile.pop();
+		folderPathForFile = folderPathForFile.join(path.sep);
+		var folderName = folderPathForFile.split(path.sep).slice(-1)[0];
+
+		addTopLevelFolder(folderName, $(elementToAppendTo))
+		addFile(fileName, $(elementToAppendTo), folderPathForFile);
+
+	}
+
+
+
+
+
+
+
 }

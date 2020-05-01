@@ -40,6 +40,7 @@
         window.$ = window.jQuery = require('jquery');
         var beautify = require('js-beautify').js;
         var path = require('path');
+        var xml_formatter = require('xml-formatter');
         var fs = require('fs');
         var _ = require('lodash');
     </script>
@@ -89,6 +90,10 @@
                 <button onclick="formatJS()" class="btn btn-primary pull-right">
                     Format JS
                 </button>
+                <button onclick="formatXML()" class="btn btn-primary pull-right">
+                    Format XML
+                </button>
+
             </div>
         </footer>
     </div>

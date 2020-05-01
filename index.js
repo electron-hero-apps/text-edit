@@ -33,6 +33,22 @@ function formatJS() {
 	editor.setValue(beautifiedJS);
 }
 
+function formatXML() {
+	var content = editor.getValue();
+	var options = {
+		indentation: '\t',
+		filter: (node) => node.type !== 'Comment',
+		collapseContent: true,
+		lineSeparator: '\n'
+	}
+	var beautified = xml_formatter(content, {
+		indent_with_tabs: true,
+		space_in_empty_paren: true
+	});
+	editor.setValue(beautified);
+}
+
+
 function saveFile() {
 	console.log('saving....');
 }
@@ -128,9 +144,11 @@ function setMode(_val) {
 	holder.ondrop = (e) => {
 		e.preventDefault();
 
-		for (let f of e.dataTransfer.files) {
-			buildTreeView('#files', f.path);
-		}
+		// for (let f of e.dataTransfer.files) {
+		// 	buildTreeView('#files', f.path);
+		// }
+		let f = e.dataTransfer.files[0];
+		buildTreeView('#files', f.path)
 
 		return false;
 	};
