@@ -131,6 +131,12 @@ function setMode(_val) {
 
 
 (function() {
+
+
+	if (localStorage.getItem('currentPath')) {
+		buildTreeView('#files', localStorage.getItem('currentPath'))
+	}
+
 	var holder = document.getElementById('navPane');
 
 	holder.ondragover = () => {
@@ -152,8 +158,12 @@ function setMode(_val) {
 		// 	buildTreeView('#files', f.path);
 		// }
 		let f = e.dataTransfer.files[0];
+		localStorage.setItem('currentPath', f.path);
 		buildTreeView('#files', f.path)
-
+		
 		return false;
 	};
 })();
+
+
+

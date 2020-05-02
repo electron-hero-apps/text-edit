@@ -8,8 +8,6 @@
     margin-right: 15px;
 }
 
-#editor {}
-
 .CodeMirror {
     font-family: Monaco, monospace !important;
     font-size: 14px;
@@ -149,8 +147,17 @@ span.nav-group-item {
     background-color: #333333;
     opacity: 1;
     z-index: 10;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #666;
 }
 
 .CodeMirror-search-field {
-    background-color: black;
+    background-color: #333;
+    border: 1px solid #222;
+}
+
+#editor {
+    background-color: #222;
+    border: 1px solid transparent;
 }
