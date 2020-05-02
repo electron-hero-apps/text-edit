@@ -4,6 +4,6 @@
     "webPreferences": {
         "nodeIntegration": true
     },
-    "backgroundColor": "#f0f0f0"
+    "backgroundColor": "#24272e"
 
 }
