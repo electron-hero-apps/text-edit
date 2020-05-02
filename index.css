@@ -100,9 +100,28 @@ span.nav-group-item {
 }
 
 .bold {
-    font-weight: bold
+    font-weight: bold;
+    color: white;
+}
+
+.mode-label {
+    margin-left: 10px;
 }
 
 #modeValue {
-    padding-left: 10px;
+    padding-left: 5px;
+    color: #aaa;
+}
+
+.toolbar-footer {
+    background-color: #1e2126;
+    background-image: none;
+    color: 'white';
+    box-shadow: none;
+    border-top: 1px solid #111;
+}
+
+.file-active {
+    background-color: #3a3f4b !important;
+    color: #ddd;
 }

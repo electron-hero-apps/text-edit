@@ -31,7 +31,7 @@ var newFolderHTML = '<span class="nav-group-item">' +
 
 var newFileHTML = '<span class="nav-group-item">' +
 	'<span class="icon icon-doc-text one-deep"></span>' +
-	'<span class="nav-item-text">libs</span>' +
+	'<span class="nav-item-text clickable-nav-item">libs</span>' +
 	'</span>';
 
 var topLevelFolder = '<span class="nav-group-item">' +
@@ -58,6 +58,14 @@ function handleItemClick() {
 		$('#filename').html(filename);
 		editor.setValue(data);
 	}
+}
+
+
+function handleFileItemClick() {
+	console.log('here in file item click');
+	$('#files .nav-group-item').removeClass('file-active');
+	var fileItem = $(this).closest('.nav-group-item');
+	$(fileItem).addClass('file-active');
 }
 
 function handleOpenerClick() {
@@ -115,6 +123,9 @@ function caseInesensitiveSort(a, b) {
 }
 
 function buildTreeView(elementToAppendTo, pathToStart) {
+	
+	console.log('here in build tree view');
+	
 	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];
@@ -162,11 +173,4 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 		addFile(fileName, $(elementToAppendTo), folderPathForFile);
 
 	}
-
-
-
-
-
-
-
 }

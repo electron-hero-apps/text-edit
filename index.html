@@ -75,15 +75,15 @@
         </div>
         <footer class="toolbar toolbar-footer">
             <div class="toolbar-actions">
-                <button class="btn btn-default">
+                <!-- <button class="btn btn-default">
                     Cancel
-                </button>
+                </button> -->
 
                 <!-- <input type="text" id="editorMode" class="form-control mode-input" placeholder="Enter mode"> -->
                 <!-- <button onclick="setMode()" class="btn btn-primary">
                     Set Mode
                 </button> -->
-                <span class="bold">Mode:</span>
+                <span class="mode-label bold">Mode:</span>
                 <span id="modeValue"></span>
 
 
@@ -103,6 +103,8 @@
     $(document).ready(function() {
         $(document).on('click', '.icon.opener', handleOpenerClick);
         $(document).on('click', '.nav-item-text', handleItemClick);
+        $(document).on('click', '.clickable-nav-item', handleFileItemClick);
+
     });
 </script>
 <script src="index.js"></script>
