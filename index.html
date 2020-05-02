@@ -20,11 +20,12 @@
     <script src="addon/fold/xml-fold.js"></script>
     <script src="addon/fold/markdown-fold.js"></script>
     <script src="addon/fold/comment-fold.js"></script>
+    <script src="addon/selection/comment-fold.js"></script>
 
     <script src="addon/comment/comment.js"></script>
 
     <link rel="stylesheet" href="lib/codemirror.css">
-    <script src="mode/javascript/javascript.js"></script>
+    <script src="addon/selection/active-line.js"></script>
 
     <script src="https://unpkg.com/jshint@2.9.6/dist/jshint.js"></script>
     <script src="https://unpkg.com/jsonlint@1.6.3/web/jsonlint.js"></script>
@@ -87,10 +88,10 @@
                 <span id="modeValue"></span>
 
 
-                <button onclick="formatJS()" class="btn btn-primary pull-right">
+                <button onclick="formatJS()" class="btn btn-dark pull-right">
                     Format JS
                 </button>
-                <button onclick="formatXML()" class="btn btn-primary pull-right">
+                <button onclick="formatXML()" class="btn btn-dark pull-right">
                     Format XML
                 </button>
 

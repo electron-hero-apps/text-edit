@@ -6,13 +6,13 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 	//mode: "html",
 	foldGutter: true,
 	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
+	styleActiveLine: true,
 	extraKeys: {
 		'Ctrl-/': 'toggleComment',
 		'Cmd-/': 'toggleComment',
 		'Cmd-Up': increaseFontSize,
 		'Cmd-Down': decreaseFontSize,
-		'Cmd-S': saveFile
-
+		'Cmd-S': saveFile,
 	},
 	lint: true
 });
@@ -51,6 +51,12 @@ function formatXML() {
 
 function saveFile() {
 	console.log('saving....');
+	var filePath = $('#appTitle').html();
+	var content = editor.getValue();
+	fs.writeFile(filePath, content, function(err, data){
+		console.log(err);
+		console.log('file written');
+	})
 }
 
 function increaseFontSize() {
@@ -119,12 +125,9 @@ function setMode(_val) {
 			editor.setOption("lint", CodeMirror.lint.css)
 			break;
 	}
-
-
-
-
-
 }
+
+
 
 (function() {
 	var holder = document.getElementById('navPane');

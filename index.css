@@ -106,11 +106,16 @@ span.nav-group-item {
 
 .mode-label {
     margin-left: 10px;
+    color: #ccc;
+    position: relative;
+    top: 4px;
 }
 
 #modeValue {
     padding-left: 5px;
     color: #aaa;
+    position: relative;
+    top: 4px;
 }
 
 .toolbar-footer {
@@ -124,4 +129,11 @@ span.nav-group-item {
 .file-active {
     background-color: #3a3f4b !important;
     color: #ddd;
+}
+
+.btn-dark {
+    background-color: #383d48;
+    color: #9da5b3;
+    border: 1px solid #181a1f;
+    padding: 6px 10px 6px;
 }

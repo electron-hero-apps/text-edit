@@ -121,4 +121,5 @@
 
 .cm-s-abcdef .CodeMirror-activeline-background {
     background: #314151;
+    opacity: 0.4;
 }
