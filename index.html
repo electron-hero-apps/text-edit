@@ -20,8 +20,13 @@
     <script src="addon/fold/xml-fold.js"></script>
     <script src="addon/fold/markdown-fold.js"></script>
     <script src="addon/fold/comment-fold.js"></script>
-    <script src="addon/selection/comment-fold.js"></script>
 
+    <script src="addon/search/searchcursor.js"></script>
+    <script src="addon/search/search.js"></script>
+    <script src="addon/search/matchesonscrollbar.js"></script>
+    <script src="addon/search/jump-to-line.js"></script>
+    <script src="addon/dialog/dialog.js"></script>
+    <script src="addon/scroll/annotatescrollbar.js"></script>
     <script src="addon/comment/comment.js"></script>
 
     <link rel="stylesheet" href="lib/codemirror.css">
@@ -61,7 +66,7 @@
                 </div>
                 <div class="pane">
 
-                    <div class="tab-group">
+                    <!-- <div class="tab-group">
                         <div class="tab-item">
                             <span class="icon icon-cancel icon-close-tab"></span>
                             <span id='filename'>index.js</span>
@@ -69,7 +74,7 @@
                         <div class="tab-item tab-item-fixed">
                             <span class="icon icon-plus"></span>
                         </div>
-                    </div>
+                    </div> -->
                     <textarea id="editor"></textarea>
                 </div>
             </div>
@@ -84,7 +89,7 @@
                 <!-- <button onclick="setMode()" class="btn btn-primary">
                     Set Mode
                 </button> -->
-                <span class="mode-label bold">Mode:</span>
+                <span class="mode-label bold">Modde:</span>
                 <span id="modeValue"></span>
 
 

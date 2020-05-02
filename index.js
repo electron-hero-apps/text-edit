@@ -13,6 +13,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 		'Cmd-Up': increaseFontSize,
 		'Cmd-Down': decreaseFontSize,
 		'Cmd-S': saveFile,
+      	'Alt-F': 'findPersistent'
 	},
 	lint: true
 });

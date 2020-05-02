@@ -137,3 +137,20 @@ span.nav-group-item {
     border: 1px solid #181a1f;
     padding: 6px 10px 6px;
 }
+
+.CodeMirror-dialog-top {
+    border: 1px solid #eee;
+    top: 10px;
+    left: 80px;
+    position: absolute;
+}
+
+.CodeMirror-dialog {
+    background-color: #333333;
+    opacity: 1;
+    z-index: 10;
+}
+
+.CodeMirror-search-field {
+    background-color: black;
+}
