@@ -3,7 +3,7 @@
 
 <head>
     <title id='appTitle'>Atom Hero</title>
-    <link rel="stylesheet" href="../../css/photon.css">
+    <link rel="stylesheet" href="https://www.electron-hero.com/cdn/photon/photon.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="theme/abcdef.css">
     <link rel="stylesheet" href="addon/lint/lint.css">
@@ -43,13 +43,16 @@
     <script src="mode/meta.js"></script>
 
     <script>
-        window.$ = window.jQuery = require('jquery');
-        var beautify = require('js-beautify').js;
-        var path = require('path');
-        var xml_formatter = require('xml-formatter');
+        const ipc = require('electron').ipcRenderer
+        let nodeRequirePath = ipc.sendSync('getRequirePath') + 'node_modules/';
+        window.$ = window.jQuery = require(nodeRequirePath + 'jquery');
+        var beautify = require(nodeRequirePath + 'js-beautify').js;
+        var path = require(nodeRequirePath + 'path');
+        var xml_formatter = require(nodeRequirePath + 'xml-formatter');
         var fs = require('fs');
-        var _ = require('lodash');
+        var _ = require(nodeRequirePath + 'lodash');
     </script>
+
 </head>
 
 <body>
