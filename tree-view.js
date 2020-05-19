@@ -52,11 +52,10 @@ function handleItemClick() {
 		var ext = filename.split('.').pop();
 		setMode(filename);
 
-		console.log(filename);
-		console.log(ext);
 		$('#appTitle').html(filePath);
 		$('#filename').html(filename);
 		editor.setValue(data);
+		addTab(filename);
 	}
 }
 

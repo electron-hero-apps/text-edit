@@ -22,13 +22,31 @@ editor.setSize('100%', '100%');
 
 var fontSize = 14;
 
+var newTabHTML = '<div class="tab-item">' +
+ '<span class="icon icon-cancel icon-close-tab"></span>' +
+ '<span class="filename">file-one.html</span>' +
+ '</div>';
+
 editor.getWrapperElement().style["font-size"] = fontSize + "px";
 
-function handleTabItemCloseClick() {
+function addTab(filename) {
+	console.log('here in add tab');
+	var newTab = $.parseHTML(newTabHTML);
+	$(newTab).find('.filename').html(filename);
+	$(newTab).addClass('active');
+	$('.tab-group > div').removeClass('active')
+	console.log(newTab);
+	$('.tab-group').append(newTab);
+}
+
+function handleTabItemCloseClick(event) {
+	console.log('here in tab close');
 	$(this).closest('.tab-item').remove();
+	event.stopPropagation();
 }
 
 function handleTabItemClick() {
+	console.log('here in tab item click...');
 	$('.tab-group > div').removeClass('active')
 	$(this).addClass('active');
 }
