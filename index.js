@@ -30,23 +30,19 @@ var newTabHTML = '<div class="tab-item">' +
 editor.getWrapperElement().style["font-size"] = fontSize + "px";
 
 function addTab(filename) {
-	console.log('here in add tab');
 	var newTab = $.parseHTML(newTabHTML);
 	$(newTab).find('.filename').html(filename);
 	$(newTab).addClass('active');
 	$('.tab-group > div').removeClass('active')
-	console.log(newTab);
 	$('.tab-group').append(newTab);
 }
 
 function handleTabItemCloseClick(event) {
-	console.log('here in tab close');
 	$(this).closest('.tab-item').remove();
 	event.stopPropagation();
 }
 
 function handleTabItemClick() {
-	console.log('here in tab item click...');
 	$('.tab-group > div').removeClass('active')
 	$(this).addClass('active');
 }
