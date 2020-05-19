@@ -41,7 +41,6 @@
 
     <script src="addon/mode/loadmode.js"></script>
     <script src="mode/meta.js"></script>
-
     <script>
         const ipc = require('electron').ipcRenderer
         let nodeRequirePath = ipc.sendSync('getRequirePath') + 'node_modules/';
@@ -52,6 +51,8 @@
         var fs = require('fs');
         var _ = require(nodeRequirePath + 'lodash');
     </script>
+    <script src="https://www.electron-hero.com/cdn/plugins/toast/jquery.toast.min.js"></script>
+    <link rel="stylesheet" href="https://www.electron-hero.com/cdn/plugins/toast/jquery.toast.min.css">
 
 </head>
 

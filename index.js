@@ -55,8 +55,13 @@ function saveFile() {
 	var filePath = $('#appTitle').html();
 	var content = editor.getValue();
 	fs.writeFile(filePath, content, function(err, data){
-		console.log(err);
-		console.log('file written');
+		$.toast({
+			heading: 'Info',
+			text: 'File saved...',
+			position: 'top-right',
+			icon: 'info',
+			hideAfter: 1000
+		})
 	})
 }
 
