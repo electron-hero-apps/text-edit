@@ -73,11 +73,15 @@
                     <div class="tab-group">
                         <div class="tab-item">
                             <span class="icon icon-cancel icon-close-tab"></span>
-                            <span id='filename'></span>
+                            <span class='filename'>file-one.html</span>
                         </div>
-                        <div class="tab-item">
+                        <div class="tab-item active">
+                            <span class="icon icon-cancel icon-close-tab"></span>
+                            <span class='filename'>file-two.html</span>
+                        </div>
+                        <!-- <div class="tab-item">
                             <span class="icon icon-plus"></span>
-                        </div>
+                        </div> -->
                     </div>
                     <textarea id="editor" style="visibility:hidden"></textarea>
                 </div>
@@ -114,7 +118,8 @@
         $(document).on('click', '.icon.opener', handleOpenerClick);
         $(document).on('click', '.nav-item-text', handleItemClick);
         $(document).on('click', '.clickable-nav-item', handleFileItemClick);
-
+        $(document).on('click', '.tab-item', handleTabItemClick);
+        $(document).on('click', '.icon-close-tab', handleTabItemCloseClick);
     });
 </script>
 <script src="index.js"></script>

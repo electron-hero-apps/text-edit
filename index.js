@@ -24,6 +24,14 @@ var fontSize = 14;
 
 editor.getWrapperElement().style["font-size"] = fontSize + "px";
 
+function handleTabItemCloseClick() {
+	$(this).closest('.tab-item').remove();
+}
+
+function handleTabItemClick() {
+	$('.tab-group > div').removeClass('active')
+	$(this).addClass('active');
+}
 
 function formatJS() {
 	var js = editor.getValue();
@@ -48,7 +56,6 @@ function formatXML() {
 	});
 	editor.setValue(beautified);
 }
-
 
 function saveFile() {
 	console.log('saving....');

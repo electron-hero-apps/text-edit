@@ -161,3 +161,28 @@ span.nav-group-item {
     background-color: #222;
     border: 1px solid transparent;
 }
+
+.tab-item {
+    max-width: 250px;
+    background-color: #24272e;
+    background-image: none;
+    color: #ddd;
+    border-left: none;
+    color: #777;
+}
+
+span.filename {
+    line-height: 20px;
+}
+
+.tab-item.active {
+    border-left: 2px solid #598def;
+    color: white;
+    background-image: none;
+    background-color: #24272e;
+}
+
+.tab-group {
+    border-bottom: none;
+    background-color: #222;
+}
