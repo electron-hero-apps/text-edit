@@ -50,11 +50,16 @@ function handleItemClick() {
 		});
 		var filename = filePath.split(path.sep).pop();
 		var ext = filename.split('.').pop();
-		setMode(filename);
+		var mode = setMode(filename);
 
 		$('#appTitle').html(filePath);
 		$('#filename').html(filename);
-		editor.setValue(data);
+
+
+		console.log(mode);
+		var res = openBuffer(filename, data, mode);
+		selectBuffer(editor, filename);
+
 		addTab(filename);
 	}
 }
