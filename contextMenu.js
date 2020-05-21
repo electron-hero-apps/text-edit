@@ -12,16 +12,16 @@ const {
 
 const contextMenu = new Menu()
 
-contextMenu.append(new MenuItem({
-	label: 'Details...',
-	click() {
-		console.log('here in details click');
-	}
-}));
-
-contextMenu.append(new MenuItem({
-	type: 'separator'
-}))
+// contextMenu.append(new MenuItem({
+// 	label: 'Details...',
+// 	click() {
+// 		console.log('here in details click');
+// 	}
+// }));
+// 
+// contextMenu.append(new MenuItem({
+// 	type: 'separator'
+// }))
 
 contextMenu.append(new MenuItem({
 	label: 'New File',

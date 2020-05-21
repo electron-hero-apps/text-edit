@@ -35,8 +35,6 @@ editor.getWrapperElement().style["font-size"] = fontSize + "px";
 var buffers = {};
 
 function openBuffer(name, text, mode) {
-  console.log('here in open buffer');
-  console.log(mode);
   buffers[name] = CodeMirror.Doc(text, mode);
   return true;
 }
@@ -70,10 +68,16 @@ function addTab(filename) {
 	$('.tab-group').append(newTab);
 }
 
+function selectTab(filename) {
+	var currentTab = $('.tab-group span.filename:contains("' + filename + '")');
+	currentTab = $(currentTab).closest('div.tab-item');
+	$('.tab-group > div').removeClass('active');
+	$(currentTab).addClass('active');
+}
+
 function handleTabItemCloseClick(event) {
 	var wasActiveTab = $(this).closest('.tab-item').hasClass('active');
 	var filename = $(this).find('.filename').html();
-	console.log(wasActiveTab);
 	
 	$(this).closest('.tab-item').remove();
 	event.stopPropagation();
@@ -88,7 +92,6 @@ function handleTabItemCloseClick(event) {
 		} else {
 			var firstTab = $('.tab-group > .tab-item')[0];
 			$(firstTab).addClass('active');
-			console.log(firstTab);
 			var filename = $(firstTab).find('.filename').html();
 			selectBuffer(editor, filename);
 		}

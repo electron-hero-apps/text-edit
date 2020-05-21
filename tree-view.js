@@ -22,10 +22,10 @@ function addTopLevelFolder(folderName, elementToAppendTo) {
 	elementToAppendTo.append(newRow);
 }
 
-var newFolderHTML = '<span class="nav-group-item folder-item">' +
+var newFolderHTML = '<span class="nav-group-item">' +
 	'<span class="icon opener icon-right-open">' +
 	'</span><span class="icon icon-folder"></span>' +
-	'<span class="nav-item-text">libs</span>' +
+	'<span class="nav-item-text folder-item">libs</span>' +
 	'<div class="content-area" ></div>' +
 	'</span>';
 
@@ -52,15 +52,21 @@ function handleItemClick() {
 		var ext = filename.split('.').pop();
 		var mode = setMode(filename);
 
-		$('#appTitle').html(filePath);
-		$('#filename').html(filename);
+		console.log(filename);
+		
+		if (buffers[filename]) {
+			console.log('already open');
+			selectBuffer(editor, filename);
+			selectTab(filename);
+			var mode = setMode(filename);
 
-
-		console.log(mode);
-		var res = openBuffer(filename, data, mode);
-		selectBuffer(editor, filename);
-
-		addTab(filename);
+		} else {
+			$('#appTitle').html(filePath);
+			$('#filename').html(filename);
+			var res = openBuffer(filename, data, mode);
+			selectBuffer(editor, filename);
+			addTab(filename);
+		}
 	}
 }
 
