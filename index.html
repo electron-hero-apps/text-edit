@@ -41,6 +41,8 @@
 
     <script src="addon/mode/loadmode.js"></script>
     <script src="mode/meta.js"></script>
+    <script src="contextMenu.js"></script>
+
     <script>
         const ipc = require('electron').ipcRenderer
         let nodeRequirePath = ipc.sendSync('getRequirePath') + 'node_modules/';
@@ -120,6 +122,11 @@
         $(document).on('click', '.clickable-nav-item', handleFileItemClick);
         $(document).on('click', '.tab-item', handleTabItemClick);
         $(document).on('click', '.icon-close-tab', handleTabItemCloseClick);
+
+        // $(document).on('contextmenu', '.file-item', handleFileItemRightClick);
+        $(document).on('keydown', '.file-item', handleFileItemKeyDown);
+
+
     });
 </script>
 <script src="index.js"></script>

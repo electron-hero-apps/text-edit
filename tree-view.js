@@ -22,16 +22,16 @@ function addTopLevelFolder(folderName, elementToAppendTo) {
 	elementToAppendTo.append(newRow);
 }
 
-var newFolderHTML = '<span class="nav-group-item">' +
+var newFolderHTML = '<span class="nav-group-item folder-item">' +
 	'<span class="icon opener icon-right-open">' +
 	'</span><span class="icon icon-folder"></span>' +
 	'<span class="nav-item-text">libs</span>' +
 	'<div class="content-area" ></div>' +
 	'</span>';
 
-var newFileHTML = '<span class="nav-group-item">' +
+var newFileHTML = '<span  class="nav-group-item">' +
 	'<span class="icon icon-doc-text one-deep"></span>' +
-	'<span class="nav-item-text clickable-nav-item">libs</span>' +
+	'<span class="nav-item-text clickable-nav-item file-item">libs</span>' +
 	'</span>';
 
 var topLevelFolder = '<span class="nav-group-item">' +
@@ -128,14 +128,11 @@ function caseInesensitiveSort(a, b) {
 
 function buildTreeView(elementToAppendTo, pathToStart) {
 	
-	console.log('here in build tree view');
-	
 	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];
 	var topFolderName = pathToStart.split(path.sep).slice(-1)[0];
 
-	console.log(pathToStart);
 	if ((fs.lstatSync(pathToStart).isDirectory())) {
 
 		addTopLevelFolder(topFolderName, $(elementToAppendTo))

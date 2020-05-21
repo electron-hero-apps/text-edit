@@ -176,10 +176,11 @@ span.filename {
 }
 
 .tab-item.active {
+    border-bottom: 1px solid #666;
     border-left: 2px solid #598def;
     color: white;
     background-image: none;
-    background-color: #24272e;
+    background-color: #282c34;
 }
 
 .tab-group {
