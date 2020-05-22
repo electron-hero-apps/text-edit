@@ -36,7 +36,7 @@ var newFileHTML = '<span  class="nav-group-item">' +
 
 var topLevelFolder = '<span class="nav-group-item">' +
 	'<span class="icon icon-folder"></span>' +
-	'<span class="nav-item-text">libs</span>' +
+	'<span class="nav-item-text folder-item">libs</span>' +
 	'</span>';
 
 
@@ -58,7 +58,6 @@ function handleItemClick() {
 			console.log('already open');
 			selectBuffer(editor, filename);
 			selectTab(filename);
-			var mode = setMode(filename);
 
 		} else {
 			$('#appTitle').html(filePath);

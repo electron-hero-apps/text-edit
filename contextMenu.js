@@ -12,17 +12,6 @@ const {
 
 const contextMenu = new Menu()
 
-// contextMenu.append(new MenuItem({
-// 	label: 'Details...',
-// 	click() {
-// 		console.log('here in details click');
-// 	}
-// }));
-// 
-// contextMenu.append(new MenuItem({
-// 	type: 'separator'
-// }))
-
 contextMenu.append(new MenuItem({
 	label: 'New File',
 	click() {
@@ -61,17 +50,74 @@ fileContextMenu.append(new MenuItem({
 	label: 'Delete',
 	click() {
 		if (confirm("Are you sure?") === true) {
-            var filePath = localStorage.getItem('currentPath');
-    		var filename = $(currentListItem).html();
-            fs.unlink(path.join(filePath, filename), function(err, data){
-                if (err) {
-                    alert(err)
-                }
-                buildTreeView('#files', localStorage.getItem('currentPath'))
-            });
+			//var filePath = localStorage.getItem('currentPath');
+			var filePath = $(currentListItem).data('path');
+			
+			fs.unlink(filePath, function(err, data) {
+				if (err) {
+					alert(err)
+				}
+				buildTreeView('#files', localStorage.getItem('currentPath'))
+			});
 		}
 	}
 }));
+
+
+const folderContextMenu = new Menu();
+
+folderContextMenu.append(new MenuItem({
+	label: 'Rename',
+	click() {
+		console.log('here in rename click');
+		$(currentListItem).attr('contenteditable', true);
+		oldText = $(currentListItem).html();
+		$(currentListItem).focus();
+	}
+}));
+
+folderContextMenu.append(new MenuItem({
+	label: 'Delete',
+	click() {
+		if (confirm("Are you sure?") === true) {
+			var filePath = localStorage.getItem('currentPath');
+			var filename = $(currentListItem).html();
+			fs.unlink(path.join(filePath, filename), function(err, data) {
+				if (err) {
+					alert(err)
+				}
+				buildTreeView('#files', localStorage.getItem('currentPath'))
+			});
+		}
+	}
+}));
+
+folderContextMenu.append(new MenuItem({
+	label: 'New File',
+	click() {
+		console.log('new file...');
+		var folderPath = $(currentListItem).data('path');
+		console.log(folderPath);
+		var fileContent = 'no information yet';
+		var filename = "untitled.txt";
+		fs.writeFile(path.join(folderPath, filename), fileContent, (err) => {
+			if (err) throw err;
+			buildTreeView('#files', localStorage.getItem('currentPath'))
+		});
+	}
+}));
+
+folderContextMenu.append(new MenuItem({
+	label: 'New Folder',
+	click() {
+		var folderPath = $(currentListItem).data('path');
+		fs.mkdir(path.join(folderPath, 'New Folder'), function(err, data){
+			console.log(err);
+			console.log('created');
+		});
+	}
+}));
+
 
 window.addEventListener('contextmenu', (e) => {
 	e.preventDefault();
@@ -92,6 +138,13 @@ window.addEventListener('contextmenu', (e) => {
 		})
 	}
 
+	if ($(el).hasClass('folder-item')) {
+		currentListItem = el;
+		folderContextMenu.popup({
+			window: remote.getCurrentWindow()
+		})
+	}
+
 }, false)
 
 
@@ -108,14 +161,16 @@ function handleFileItemKeyDown(event) {
 	if (event.keyCode === 13 || event.keyCode === 27) {
 
 		if (event.keyCode === 27) {
-			// hit ESC, put old text back and get out
 			$(currentListItem).html(oldText);
 		}
 
 		if (event.keyCode === 13) {
 			// hit enter, go ahead and rename file
 			var oldPath = $(this).data('path');
-			var newPath = oldPath.replace(oldText, $(currentListItem).html())
+			newPath = oldPath.split(path.sep);
+			newPath.pop();
+			newPath = newPath.join(path.sep);
+			newPath = path.join(newPath,$(currentListItem).html())
 			fs.rename(oldPath, newPath, function(err, data) {
 				console.log(err);
 				console.log('here in rename callback')
