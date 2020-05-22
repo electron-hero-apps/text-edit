@@ -186,4 +186,5 @@ span.filename {
 .tab-group {
     border-bottom: none;
     background-color: #222;
+    min-height: 25px;
 }

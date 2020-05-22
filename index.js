@@ -47,7 +47,7 @@ function newBuffer(where) {
 }
 
 function selectBuffer(editor, name) {
-  console.log(buffers);
+  console.log(name);
   var buf = buffers[name];
   if (buf.getEditor()) buf = buf.linkedDoc({sharedHist: true});
   var old = editor.swapDoc(buf);
@@ -60,40 +60,53 @@ function selectBuffer(editor, name) {
   editor.focus();
 }
 
-function addTab(filename) {
+function addTab(filepath) {
 	var newTab = $.parseHTML(newTabHTML);
-	$(newTab).find('.filename').html(filename);
+	$(newTab).find('.filename').html(filepath.split(path.sep).pop());
+	$(newTab).data('filepath',filepath);
 	$(newTab).addClass('active');
+	$(newTab).attr('title', filepath);
 	$('.tab-group > div').removeClass('active')
 	$('.tab-group').append(newTab);
 }
 
-function selectTab(filename) {
-	var currentTab = $('.tab-group span.filename:contains("' + filename + '")');
-	currentTab = $(currentTab).closest('div.tab-item');
+function selectTab(filepath) {
+	var currentTab;
+	$('#appTitle').html(filepath);
+
+	var currentTabs = $('.tab-group div.tab-item');
+	_.each(currentTabs, function(item){
+		tabPath = $(item).data('filepath');
+		if (tabPath == filepath) {
+			currentTab = item;
+		}
+	})
 	$('.tab-group > div').removeClass('active');
 	$(currentTab).addClass('active');
 }
 
 function handleTabItemCloseClick(event) {
 	var wasActiveTab = $(this).closest('.tab-item').hasClass('active');
-	var filename = $(this).find('.filename').html();
+	var filepath = $(this).closest('.tab-item').data('filepath');
 	
 	$(this).closest('.tab-item').remove();
 	event.stopPropagation();
 
-	delete buffers[$(this).find('.filename').html()];
+	console.log(filepath)
+
+	delete buffers[filepath];
 	
 	if (wasActiveTab) {
 		// see if there are any tabs left
 		var tabsLeft = $('.tab-group > .tab-item');
 		if (tabsLeft.length === 0) {
 			editor.setValue('');
+			$('#appTitle').html('');
 		} else {
 			var firstTab = $('.tab-group > .tab-item')[0];
 			$(firstTab).addClass('active');
-			var filename = $(firstTab).find('.filename').html();
-			selectBuffer(editor, filename);
+			var filepath = $(firstTab).data('filepath');
+			selectBuffer(editor, filepath);
 		}
 	}
 }
@@ -101,9 +114,8 @@ function handleTabItemCloseClick(event) {
 function handleTabItemClick() {
 	$('.tab-group > div').removeClass('active')
 	$(this).addClass('active');
-
-	selectBuffer(editor, $(this).find('.filename').html());
-
+	$('#appTitle').html($(this).data('filepath'));
+	selectBuffer(editor, $(this).data('filepath'));
 }
 
 function formatJS() {

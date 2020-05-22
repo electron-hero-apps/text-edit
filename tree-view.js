@@ -54,17 +54,17 @@ function handleItemClick() {
 
 		console.log(filename);
 		
-		if (buffers[filename]) {
+		if (buffers[filePath]) {
 			console.log('already open');
-			selectBuffer(editor, filename);
-			selectTab(filename);
+			selectBuffer(editor, filePath);
+			selectTab(filePath);
 
 		} else {
 			$('#appTitle').html(filePath);
 			$('#filename').html(filename);
-			var res = openBuffer(filename, data, mode);
-			selectBuffer(editor, filename);
-			addTab(filename);
+			var res = openBuffer(filePath, data, mode);
+			selectBuffer(editor, filePath);
+			addTab(filePath);
 		}
 	}
 }
