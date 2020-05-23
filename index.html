@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="addon/fold/foldgutter.css" />
 
     <script src="lib/codemirror.js"></script>
+    <script src="lib/util/formatting.js"></script>
 
+    <script src="mode/css/css.js"></script>
+    <script src="mode/xml/xml.js"></script>
+    <script src="mode/javascript/javascript.js"></script>
+    <script src="mode/htmlmixed/htmlmixed.js"></script>
+  
     <script src="tree-view.js"></script>
 
 
@@ -40,7 +46,9 @@
     <script src="addon/lint/json-lint.js"></script>
 
     <script src="addon/mode/loadmode.js"></script>
-    <script src="mode/meta.js"></script>
+    <script src="addon/mode/loadmode.js"></script>
+
+  <script src="mode/meta.js"></script>
     <script src="contextMenu.js"></script>
 
     <script>
@@ -102,7 +110,9 @@
                 <span class="mode-label bold">Mode:</span>
                 <span id="modeValue"></span>
 
-
+                <button onclick="autoFormat()" class="btn btn-dark pull-right">
+                    Format Selection
+                </button>
                 <button onclick="formatJS()" class="btn btn-dark pull-right">
                     Format JS
                 </button>

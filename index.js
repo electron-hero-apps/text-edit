@@ -5,6 +5,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 	lineNumbers: true,
 	//mode: "html",
 	foldGutter: true,
+	mode: "htmlmixed",
 	gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
 	styleActiveLine: true,
 	extraKeys: {
@@ -116,6 +117,16 @@ function handleTabItemClick() {
 	$(this).addClass('active');
 	$('#appTitle').html($(this).data('filepath'));
 	selectBuffer(editor, $(this).data('filepath'));
+}
+
+function getSelectedRange() {
+	return { from: editor.getCursor(true), to: editor.getCursor(false) };
+}
+
+function autoFormat() {
+    var range = getSelectedRange();
+    editor.autoFormatRange(range.from, range.to);
+  	console.log('formatted range...');
 }
 
 function formatJS() {
