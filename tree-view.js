@@ -1,14 +1,30 @@
+marginSize = 21;
+
 function addFolder(folderName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFolderHTML);
+	
+	//console.log($(elementToAppendTo).data('margin'));
+	var newMargin = $(elementToAppendTo).data('margin')
+	newMargin += marginSize;
+	$(newRow).find('.opener').css('margin-left', newMargin + 'px');
+
 	$(newRow).find('.nav-item-text').html(folderName);
 	$(newRow).find('.nav-item-text').data('path', path.join(_path, folderName));
 	$(newRow).find('.nav-item-text').data('entryType', 'folder');
 	$(newRow).find('.content-area').toggle(false);
+	$(newRow).find('.content-area').data('margin', newMargin)
+	$(newRow).data('margin',newMargin)
+
 	elementToAppendTo.append(newRow);
 }
 
 function addFile(fileName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFileHTML);
+
+	var newMargin = $(elementToAppendTo).data('margin')
+	newMargin += marginSize * 2;
+	$(newRow).find('.icon-doc-text').css('margin-left', newMargin + 'px');
+
 	$(newRow).find('.nav-item-text').html(fileName);
 	$(newRow).find('.nav-item-text').data('path', path.join(_path, fileName));
 	$(newRow).find('.nav-item-text').data('entryType', 'file');
@@ -16,9 +32,14 @@ function addFile(fileName, elementToAppendTo, _path) {
 }
 
 function addTopLevelFolder(folderName, elementToAppendTo) {
+	// in the future there might be multiple of these to support multiple projects 
+	// being loaded at the same time
 	var newRow = $.parseHTML(topLevelFolder);
 	$(newRow).find('.nav-item-text').html(folderName);
+	$(newRow).find('.icon-folder').css('margin-left', marginSize + 'px');
+	$(elementToAppendTo).data('margin',0)
 	$(newRow).find('.nav-item-text').data('entryType', 'top-folder');
+	$(newRow).data('margin',  '1')
 	elementToAppendTo.append(newRow);
 }
 
@@ -132,7 +153,7 @@ function caseInesensitiveSort(a, b) {
 }
 
 function buildTreeView(elementToAppendTo, pathToStart) {
-	
+	// when we're here we're starting from scratch
 	$(elementToAppendTo).empty();
 	var filesToAdd = [];
 	var foldersToAdd = [];

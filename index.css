@@ -58,7 +58,6 @@
 
 span.nav-group-item {
     padding-left: 0px;
-	border: 1px solid red;
 }
 
 .nav-item-text {
@@ -82,8 +81,7 @@ span.nav-group-item {
 
 .content-area {
     /* height: 30px; */
-  
-/*   	margin-left: 6px;
+    /*   	margin-left: 6px;
    */
     /* border: 1px solid red; */
 }
