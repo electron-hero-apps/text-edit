@@ -2,29 +2,23 @@ marginSize = 21;
 
 function addFolder(folderName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFolderHTML);
-	
-	//console.log($(elementToAppendTo).data('margin'));
 	var newMargin = $(elementToAppendTo).data('margin')
 	newMargin += marginSize;
 	$(newRow).find('.opener').css('margin-left', newMargin + 'px');
-
 	$(newRow).find('.nav-item-text').html(folderName);
 	$(newRow).find('.nav-item-text').data('path', path.join(_path, folderName));
 	$(newRow).find('.nav-item-text').data('entryType', 'folder');
 	$(newRow).find('.content-area').toggle(false);
 	$(newRow).find('.content-area').data('margin', newMargin)
 	$(newRow).data('margin',newMargin)
-
 	elementToAppendTo.append(newRow);
 }
 
 function addFile(fileName, elementToAppendTo, _path) {
 	var newRow = $.parseHTML(newFileHTML);
-
 	var newMargin = $(elementToAppendTo).data('margin')
 	newMargin += marginSize * 2;
 	$(newRow).find('.icon-doc-text').css('margin-left', newMargin + 'px');
-
 	$(newRow).find('.nav-item-text').html(fileName);
 	$(newRow).find('.nav-item-text').data('path', path.join(_path, fileName));
 	$(newRow).find('.nav-item-text').data('entryType', 'file');
