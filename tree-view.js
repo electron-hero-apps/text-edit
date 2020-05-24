@@ -137,12 +137,12 @@ function handleOpenerClick() {
 				})
 			});
 		}
-		$(content).toggle(true);
+		$(content).first().toggle(true);
 	} else {
 		$(icon).removeClass('icon-down-open')
 		$(icon).addClass('icon-right-open');
 		var content = $(this).closest('.nav-group-item').find('.content-area');
-		$(content).toggle(false);
+		$(content).first().toggle(false);
 	}
 }
 
