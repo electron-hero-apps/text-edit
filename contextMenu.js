@@ -15,7 +15,6 @@ const contextMenu = new Menu()
 contextMenu.append(new MenuItem({
 	label: 'New File',
 	click() {
-		console.log('new file...');
 		var filePath = localStorage.getItem('currentPath');
 		var fileContent = "";
 		var filename = "untitled.txt";

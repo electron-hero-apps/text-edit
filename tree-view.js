@@ -25,7 +25,7 @@ function addFile(fileName, elementToAppendTo, _path) {
 	elementToAppendTo.append(newRow);
 }
 
-function addTopLevelFolder(folderName, elementToAppendTo) {
+function addTopLevelFolder(folderName, elementToAppendTo, _path) {
 	// in the future there might be multiple of these to support multiple projects 
 	// being loaded at the same time
 	var newRow = $.parseHTML(topLevelFolder);
@@ -33,6 +33,7 @@ function addTopLevelFolder(folderName, elementToAppendTo) {
 	$(newRow).find('.icon-folder').css('margin-left', marginSize + 'px');
 	$(elementToAppendTo).data('margin',0)
 	$(newRow).find('.nav-item-text').data('entryType', 'top-folder');
+	$(newRow).find('.nav-item-text').data('path', _path);
 	$(newRow).data('margin',  '1')
 	elementToAppendTo.append(newRow);
 }
@@ -115,7 +116,7 @@ function handleOpenerClick() {
 				}
 				//listing all files using forEach
 				files.forEach(function(file) {
-					if (file.substr(0, 1) != '.') {
+					if (file.substr(0, 9) != '.DS_Store') {
 						if (fs.lstatSync(path.join(filePath, file)).isDirectory()) {
 							foldersToAdd.push(file);
 						} else {
@@ -155,7 +156,7 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 
 	if ((fs.lstatSync(pathToStart).isDirectory())) {
 
-		addTopLevelFolder(topFolderName, $(elementToAppendTo))
+		addTopLevelFolder(topFolderName, $(elementToAppendTo), pathToStart)
 		fs.readdir(pathToStart, function(err, files) {
 			//handling error
 			if (err) {
@@ -163,7 +164,7 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 			}
 			//listing all files using forEach
 			files.forEach(function(file) {
-				if (file.substr(0, 1) != '.') {
+				if (file.substr(0, 9) != '.DS_Store') {
 					if (fs.lstatSync(path.join(pathToStart, file)).isDirectory()) {
 						foldersToAdd.push(file);
 					} else {
@@ -190,7 +191,7 @@ function buildTreeView(elementToAppendTo, pathToStart) {
 		folderPathForFile = folderPathForFile.join(path.sep);
 		var folderName = folderPathForFile.split(path.sep).slice(-1)[0];
 
-		addTopLevelFolder(folderName, $(elementToAppendTo))
+		addTopLevelFolder(folderName, $(elementToAppendTo, pathToStart))
 		addFile(fileName, $(elementToAppendTo), folderPathForFile);
 
 	}

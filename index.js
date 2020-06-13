@@ -20,7 +20,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 });
 editor.setOption("theme", 'abcdef');
 editor.setSize('100%', '100%');
-
+ 
 var fontSize = 14;
 
 var newTabHTML = '<div class="tab-item">' +
