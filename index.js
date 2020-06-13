@@ -58,7 +58,9 @@ function selectBuffer(editor, name) {
     for (var name in buffers) if (buffers[name] == old) buffers[name] = linked;
     old.unlinkDoc(linked);
   }
+  var mode = setMode(name);
   editor.focus();
+ 
 }
 
 function addTab(filepath) {
