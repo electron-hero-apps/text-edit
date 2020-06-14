@@ -217,7 +217,7 @@ function setMode(_val) {
 		$('#modeValue').html(spec);
 	
 	} else {
-		alert("Could not find a mode corresponding to " + val);
+		//alert("Could not find a mode corresponding to " + val);
 		$('#modeValue').html('???');
 	
 	}
