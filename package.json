@@ -1,28 +1,28 @@
 {
-  "name": "text-edit",
-  "version": "1.0.4",
-  "description": "Electron Hero App - Text Editing",
-  "main": "mainWindow.json",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/electron-hero-apps/text-edit.git"
-  },
-  "keywords": [
-    "electron-hero-app",
-    "text-edit",
-    "text",
-    "editor"
-  ],
-  "author": "John M. Anderson",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/electron-hero-apps/text-edit/issues"
-  },
-  "homepage": "https://github.com/electron-hero-apps/text-edit#readme"
+    "name": "text-edit",
+    "version": "1.0.4",
+    "description": "Electron Hero App - Text Editing",
+    "main": "mainWindow.json",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/electron-hero-apps/text-edit.git"
+    },
+    "keywords": [
+        "electron-hero-app",
+        "text-edit",
+        "text",
+        "editor"
+    ],
+    "author": "John M. Anderson",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/electron-hero-apps/text-edit/issues"
+    },
+    "homepage": "https://github.com/electron-hero-apps/text-edit#readme"
 }
